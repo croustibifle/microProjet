@@ -8,6 +8,19 @@ import static org.junit.jupiter.api.Assertions.*;
 class JeuTest {
     @org.junit.jupiter.api.BeforeEach
     void setUp() {
+        Jeu jeu = new Jeu();
+        for(int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+                jeu.setPlateau(i, j, CaseStatut.vide);
+            }
+        }
+        jeu.setPlateau(1,3,CaseStatut.blanche);
+        jeu.setPlateau(1,4,CaseStatut.noire);
+        jeu.setPlateau(5,4,CaseStatut.blanche);
+        jeu.setPlateau(5,5,CaseStatut.blanche);
+        jeu.setPlateau(5,6,CaseStatut.noire);
+        jeu.setPlateau(3,4,CaseStatut.noire);
+
     }
 
     //verifie que le joueur ne joue pas sur une case déjà prise

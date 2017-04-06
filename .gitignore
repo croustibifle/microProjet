@@ -1,6 +1,7 @@
 /nbproject/
 /build.xml
-/WEB/WEB-INF/
-/source/conf/
-/gitignore
-/build/
+/web/WEB-INF/
+/src/conf/
+/.idea
+/.gitignore
+/build

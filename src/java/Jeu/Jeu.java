@@ -232,7 +232,11 @@ public class Jeu implements API {
         }
         return check;
     }
-    
+
+    public void setPlateau(int x ,int y ,CaseStatut k) {
+        plateau[x][y]= k;
+    }
+
     // ================= attribue le joueur courant ====================
     
     public void joueurCourant()
