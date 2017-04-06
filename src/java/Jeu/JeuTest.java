@@ -10,6 +10,7 @@ class JeuTest {
     void setUp() {
     }
 
+    //verifie que le joueur ne joue pas sur une case déjà prise
     @org.junit.jupiter.api.Test
     void testActionCasePrise() {
         Jeu jeu = new Jeu();
@@ -25,6 +26,7 @@ class JeuTest {
     void testInit() {
         Jeu jeu = new Jeu();
         jeu.init();
+
     }
 
 }
