@@ -5,11 +5,14 @@
  */
 package Jeu;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author theking
  */
 public class Jeu implements API{
+    private int[][] plateau = new int[8][8];
  
     @Override
     public void init()
