@@ -15,11 +15,14 @@ public class Jeu implements API {
     private String dernierJoueur = null;
     private int derniereAct;
  
+//=================== Constructeur ========================
     public Jeu()
     {
         plateau = new CaseStatut[8][8];
         derniereAct = 0;
     }
+    
+//=================== Action ========================
     
     @Override
     public void init()
@@ -37,6 +40,8 @@ public class Jeu implements API {
         this.plateau[5][4] = CaseStatut.blanche;
         derniereAct = 0;
     }
+    
+//=================== Action ========================
     
     @Override
     public boolean action(int a, int b)
@@ -65,6 +70,8 @@ public class Jeu implements API {
         
     }
     
+    //=================== Vainqueur ========================
+    
     @Override
     public int vainqueur()
     {
@@ -84,6 +91,8 @@ public class Jeu implements API {
         else return 0;     
     }
     
+    //=================== statut ========================
+    
     @Override
     public String statut()
     {
@@ -93,12 +102,15 @@ public class Jeu implements API {
             return "Joueur 1";
     }
     
+    //=================== derniere action ========================
+    
     @Override
     public int derniereAction()
     {
         return derniereAct;
     }
     
+    ////=================== Affichage ========================
     @Override
     public String affichage()
     {
@@ -127,6 +139,9 @@ public class Jeu implements API {
         return "information";
     }
     
+    //=================== test de la direction ========================
+    
+    
     public void testDirection(int colonne,int ligne,int i,int j,CaseStatut couleur)
     {
         int ligne2 = ligne + j;
@@ -147,6 +162,8 @@ public class Jeu implements API {
         }
         
     }
+    
+    //=================== verifie si un joueur peut jouer ========================
     
     public boolean checkAvailability(int colonne,int ligne,CaseStatut couleur)
     {
@@ -184,6 +201,8 @@ public class Jeu implements API {
         return isPossible;
     }
     
+    //=================== inverse la couleur ========================
+    
     public CaseStatut inverse(CaseStatut couleur)
     {
         if(couleur == CaseStatut.blanche) return CaseStatut.noire;
@@ -191,6 +210,8 @@ public class Jeu implements API {
         return CaseStatut.vide;
     }
 
+    //=================== verifie si c'est la fin de la partie ========================
+    
     public boolean finDePartie() 
     {
         boolean check = true;
@@ -199,8 +220,8 @@ public class Jeu implements API {
             for(int j = 0; j<8;j++)
             {
                 String indexCase = "" + j + i; 
-                if (action(1,Integer.parseInt(indexCase))) check = false;
-                if (action(2,Integer.parseInt(indexCase))) check = false;
+                if (checkAvailability(j,i,CaseStatut.blanche)) check = false;
+                if (checkAvailability(j,i,CaseStatut.noire)) check = false;
             }
         }
         return check;
