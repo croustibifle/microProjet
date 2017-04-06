@@ -17,6 +17,8 @@
         <div style="margin:10%;border: solid 1px black;padding: 5px;">
          <h1>Othelo</h1>
          <% out.println("c'est au tour de "+jeu.statut()+"<br>");%>
+         <% out.println(jeu.affichage()+"<br>");%>
+         <% out.println("dernière action effectuée en "+jeu.derniereAction()+"<br>");%>
         <form method="get" action="main.jsp">
             <label for="choice">Entrez une position (colonneligne) : </label></br>
             <input type="number" name="answer" min="0" max="1000000" size="24" 
@@ -26,7 +28,17 @@
         </form>
        
         <% 
-
+            String answer = request.getParameter("answer");
+            int newAnswer = Integer.valueOf(answer);
+            jeu.init();
+            if (jeu.statut() == "Joueur 1"){
+                jeu.action(1,newAnswer);
+            }else{
+                jeu.action(2,newAnswer);
+            }
+            if(jeu.finDePartie()){
+                out.println("la vainqueur est le joueur "+jeu.vainqueur()+"<br>");
+            }
         %>
         </div>
     </body>
