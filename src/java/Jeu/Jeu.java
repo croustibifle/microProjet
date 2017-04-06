@@ -162,13 +162,45 @@ public class Jeu implements API {
         
     }
     
+    public boolean checkAvailability(int colonne,int ligne,CaseStatut couleur)
+    {
+            boolean isPossible = false;
+
+            for(int i = -1; i < 2; i++)
+        {
+            for(int j = -1; j < 2; j++)
+            {
+                if(colonne + i >= 0 && colonne + i < 8 && ligne + j >= 0 && ligne + j < 8)
+                {
+                    {
+                        if(this.plateau[colonne + i][ligne + j] == couleur)
+                        {
+                            int ligne2 = ligne + j;
+                            int colonne2 = colonne + i;
+                            while(ligne2 >= 0 && ligne2 < 8 && colonne2 >= 0 && colonne2 < 8 && this.plateau[colonne2][ligne2] == couleur)
+                            {
+                                ligne2+=j;
+                                colonne2+=i;
+                            }
+                            if(ligne2 < 0 && ligne2 > 7 && colonne2 < 0 && colonne2 > 7) return false;
+                            isPossible = true;
+                        }
+
+                    }
+                }
+            }
+        }
+
+        return isPossible;
+    }
+    
     public CaseStatut inverse(CaseStatut couleur)
     {
         if(couleur == CaseStatut.blanche) return CaseStatut.noire;
         else if(couleur == CaseStatut.noire) return CaseStatut.blanche;
         return CaseStatut.vide;
     }
-    
+
     public boolean finDePartie() 
     {
         boolean check = true;
