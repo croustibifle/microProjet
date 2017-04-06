@@ -12,5 +12,5 @@ package Jeu;
 public enum CaseStatut {
     vide,
     blanche,
-    noire,   
+    noire,  
 }
