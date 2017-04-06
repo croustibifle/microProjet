@@ -3,11 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package java.Jeu;
+package Jeu;
 
-import java.Jeu.API;
-import java.Jeu.CaseStatut;
-import java.util.ArrayList;
 
 /**
  *
@@ -46,36 +43,26 @@ public class Jeu implements API {
     {
         int ligne = (b % 10) - 1;
         int colonne = (b / 10) - 1;
-        if (a == 1 && checkAvailability(colonne,ligne,CaseStatut.noire))
-        {
             for(int i = -1; i < 2; i++)
             {
                 for(int j = -1; j < 2; j++)
                 {
+                    if (a == 1 && checkAvailability(colonne,ligne,CaseStatut.noire))
+                    {
                         if(colonne + i >= 0 && colonne + i < 8 && ligne + j >= 0 && ligne + j < 8 && this.plateau[colonne + i][ligne + j] == CaseStatut.blanche)
                         {
-                            int ligne2 = ligne + j;
-                            int colonne2 = colonne + i;
-                            while(ligne2 >= 0 && ligne2 < 8 && colonne2 >= 0 && colonne2 < 8 && this.plateau[colonne2][ligne2] == CaseStatut.blanche)
-                            {
-                                ligne2+=j;
-                                colonne2+=i;
-                            }
-                            if(this.plateau[colonne2][ligne2] == CaseStatut.blanche)
-                            {
-                                while(ligne2 != ligne && colonne2 != colonne)
-                                {
-                                    ligne2 -= j;
-                                    colonne2 -=i;
-                                    this.plateau[colonne2][ligne2] = CaseStatut.blanche;
-                                }
-                            }
+                            testDirection(colonne,ligne,i,j,CaseStatut.blanche);
+                        }
+                    }else if (a == 2 && checkAvailability(colonne,ligne,CaseStatut.blanche))
+                        if(colonne + i >= 0 && colonne + i < 8 && ligne + j >= 0 && ligne + j < 8 && this.plateau[colonne + i][ligne + j] == CaseStatut.noire)
+                        {
+                            testDirection(colonne,ligne,i,j,CaseStatut.noire);
                         }
                 }
         
-        }
-
- 
+            }
+        return checkAvailability(colonne,ligne,CaseStatut.noire);
+        
     }
     
     @Override
@@ -140,7 +127,7 @@ public class Jeu implements API {
         return "information";
     }
     
-    public boolean testDirection(int colonne,int ligne,int i,int j,CaseStatut couleur)
+    public void testDirection(int colonne,int ligne,int i,int j,CaseStatut couleur)
     {
         int ligne2 = ligne + j;
         int colonne2 = colonne + i;
@@ -149,8 +136,7 @@ public class Jeu implements API {
             ligne2+=j;
             colonne2+=i;
         }
-        if(ligne2 < 0 && ligne2 > 7 && colonne2 < 0 && colonne2 > 7) return false;
-        if(this.plateau[colonne2][ligne2] == inverse(couleur))
+        if(ligne2 >= 0 && ligne2 < 8 && colonne2 >= 0 && colonne2 < 8 && this.plateau[colonne2][ligne2] == inverse(couleur))
         {
             while(ligne2 != ligne && colonne2 != colonne)
             {
@@ -159,7 +145,6 @@ public class Jeu implements API {
                 this.plateau[colonne2][ligne2] = inverse(couleur);
             }
         }
-        return true;
         
     }
     
