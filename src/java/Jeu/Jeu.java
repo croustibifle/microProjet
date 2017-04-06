@@ -41,6 +41,75 @@ public class Jeu implements API{
     @Override
     public boolean action(int a, int b)
     {
+        int ligne = (b % 10) - 1;
+        int colonne = (b / 10) - 1 ;
+        if(ligne < 1 || ligne >= 8 || colonne < 1 || colonne > 8 || this.plateau[colonne][ligne] != CaseStatut.vide)
+        {
+            return false;
+        }
+        boolean isPossible = false;
+        for(int i = -1; i < 2; i++)
+        {
+            for(int j = -1; j < 2; j++)
+            {
+                if(colonne + i >= 0 && colonne + i < 8 && ligne + j >= 0 && ligne + j < 8)
+                {
+                    {
+                        if(a == 1 && this.plateau[colonne + i][ligne + j] == CaseStatut.noire)
+                        {
+                            int ligne2 = ligne + j;
+                            int colonne2 = colonne + i;
+                            while(ligne2 >= 0 && ligne2 < 8 && colonne2 >= 0 && colonne2 < 8 && this.plateau[colonne2][ligne2] == CaseStatut.noire)
+                            {
+                                ligne2+=j;
+                                colonne2+=i;
+                            }
+                            if(ligne2 < 0 && ligne2 > 7 && colonne2 < 0 && colonne2 > 7) continue;
+                            if(this.plateau[colonne2][ligne2] == CaseStatut.blanche)
+                            {
+                                while(ligne2 != ligne && colonne2 != colonne)
+                                {
+                                    ligne2 -= j;
+                                    colonne2 -=i;
+                                    this.plateau[colonne2][ligne2] = CaseStatut.blanche;
+                                }
+                            }
+                            
+                        }
+                        else if(a == 2 && this.plateau[colonne + i][ligne + j] == CaseStatut.blanche)
+                        {
+                            int ligne2 = ligne + j;
+                            int colonne2 = colonne + i;
+                            while(ligne2 >= 0 && ligne2 < 8 && colonne2 >= 0 && colonne2 < 8 && this.plateau[colonne2][ligne2] == CaseStatut.blanche)
+                            {
+                                ligne2+=j;
+                                colonne2+=i;
+                            }
+                            if(ligne2 < 0 && ligne2 > 7 && colonne2 < 0 && colonne2 > 7) continue;
+                            if(this.plateau[colonne2][ligne2] == CaseStatut.noire)
+                            {
+                                while(ligne2 != ligne && colonne2 != colonne)
+                                {
+                                    ligne2 -= j;
+                                    colonne2 -=i;
+                                    this.plateau[colonne2][ligne2] = CaseStatut.noire;
+                                }
+                            }
+                        }
+                        if(this.plateau[colonne + i][ligne + j] != CaseStatut.vide)
+                    }
+                    isPossible = true;
+                    break;
+                }
+            }
+        }
+        if(!isPossible)
+        {
+            return false;
+        }
+        
+        
+        
         return true;
     }
     
