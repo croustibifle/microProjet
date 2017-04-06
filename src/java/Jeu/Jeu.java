@@ -9,6 +9,36 @@ package Jeu;
  *
  * @author theking
  */
-public class Jeu extends API{
+public class Jeu implement API{
+    
+    public void init()
+    {
+        
+    }
+    
+    public boolean action(int a, int b)
+    {
+        return true;
+    }
+    
+    public int vainqueur()
+    {
+        return 0;
+    }
+    
+    public String statut()
+    {
+        return "Joueur 1";
+    }
+    
+    public int derniereAction()
+    {
+        return 0;
+    }
+    
+    public String affichage()
+    {
+        return "information";
+    }
     
 }
