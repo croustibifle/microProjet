@@ -126,4 +126,17 @@ public class Jeu implements API{
         return CaseStatut.vide;
     }
     
+    public boolean plateauPlein(CaseStatut[][] plateau) // return true si plein, false sinon
+    {
+        boolean check = true;
+        for(int i = 0; i < 8; i++)
+        {
+            for(int j = 0; j<8;j++)
+            {
+                if(this.plateau[j][i] == CaseStatut.vide) check = false;
+            }
+        }
+        return check;
+    }
+    
 }
