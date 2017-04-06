@@ -12,12 +12,30 @@ import java.util.ArrayList;
  * @author theking
  */
 public class Jeu implements API{
-    private CaseStatut[][] plateau = new CaseStatut[8][8];
+    private CaseStatut[][] plateau;
+    private int derniereAct;
  
+    public Jeu()
+    {
+        plateau = new CaseStatut[8][8];
+        derniereAct = 0;
+    }
+    
     @Override
     public void init()
     {
-        
+        for(int i = 0; i < 8; i++)
+        {
+            for(int j = 0; j<8;j++)
+            {
+                this.plateau[j][i] = CaseStatut.vide;
+            }
+        }
+        this.plateau[4][4] = CaseStatut.noire;
+        this.plateau[5][5] = CaseStatut.noire;
+        this.plateau[4][5] = CaseStatut.blanche;
+        this.plateau[5][4] = CaseStatut.blanche;
+        derniereAct = 0;
     }
     
     @Override
@@ -41,7 +59,7 @@ public class Jeu implements API{
     @Override
     public int derniereAction()
     {
-        return 0;
+        return derniereAct;
     }
     
     @Override
