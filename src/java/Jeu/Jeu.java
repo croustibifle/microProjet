@@ -13,6 +13,7 @@ import java.util.ArrayList;
  */
 public class Jeu implements API{
     private CaseStatut[][] plateau;
+    private String dernierJoueur = null;
     private int derniereAct;
  
     public Jeu()
@@ -57,11 +58,13 @@ public class Jeu implements API{
                     {
                         if(a == 1 && this.plateau[colonne + i][ligne + j] == CaseStatut.noire)
                         {
+                            dernierJoueur = "Joueur 1";
                             testDirection(colonne,ligne,i,j,CaseStatut.noire);
                             
                         }
                         else if(a == 2 && this.plateau[colonne + i][ligne + j] == CaseStatut.blanche)
                         {
+                            dernierJoueur = "Joueur 2";
                             testDirection(colonne,ligne,i,j,CaseStatut.blanche);
                         }
                     }
@@ -94,7 +97,9 @@ public class Jeu implements API{
     @Override
     public String statut()
     {
-        return "Joueur 1";
+        if (dernierJoueur == "Joueur 1") return "Joueur 2";
+        else return "Joueur 1";
+        
     }
     
     @Override
@@ -169,8 +174,8 @@ public class Jeu implements API{
             for(int j = 0; j<8;j++)
             {
                 String indexCase = "" + j + i; 
-                if (action(1,Integer.parseInt(indexCase))) check = true;
-                if (action(2,Integer.parseInt(indexCase))) check = true;
+                if (action(1,Integer.parseInt(indexCase))) check = false;
+                if (action(2,Integer.parseInt(indexCase))) check = false;
             }
         }
         return check;
