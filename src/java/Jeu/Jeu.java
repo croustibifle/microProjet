@@ -106,6 +106,28 @@ public class Jeu implements API{
     @Override
     public String affichage()
     {
+        String information = "";
+        for(int i = 0; i<8; i++)
+        {
+            for(int j=0; j<8;j++)
+            {
+                information = information + "[";
+                if(this.plateau[i][j] == CaseStatut.blanche)
+                {
+                    information = information + "O";
+                }
+                else if(this.plateau[i][j] == CaseStatut.noire)
+                {
+                    information = information + "X";
+                }
+                else
+                {
+                    information = information + " ";
+                }
+                information = information + "]";
+            }
+            information += "\n";
+        }
         return "information";
     }
     
