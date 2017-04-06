@@ -45,36 +45,37 @@ public class Jeu implements API {
     public boolean action(int a, int b)
     {
         int ligne = (b % 10) - 1;
-        int colonne = (b / 10) - 1 ;
-        if(ligne < 1 || ligne >= 8 || colonne < 1 || colonne > 8 || this.plateau[colonne][ligne] != CaseStatut.vide)
+        int colonne = (b / 10) - 1;
+        if (a == 1 && checkAvailability(colonne,ligne,CaseStatut.noire))
         {
-            return false;
-        }
-        boolean isPossible = false;
-        for(int i = -1; i < 2; i++)
-        {
-            for(int j = -1; j < 2; j++)
+            for(int i = -1; i < 2; i++)
             {
-                if(colonne + i >= 0 && colonne + i < 8 && ligne + j >= 0 && ligne + j < 8)
+                for(int j = -1; j < 2; j++)
                 {
-                    {
-                        if(a == 1 && this.plateau[colonne + i][ligne + j] == CaseStatut.noire)
+                        if(colonne + i >= 0 && colonne + i < 8 && ligne + j >= 0 && ligne + j < 8 && this.plateau[colonne + i][ligne + j] == CaseStatut.blanche)
                         {
-                            dernierJoueur = "Joueur 1";
-                            testDirection(colonne,ligne,i,j,CaseStatut.noire);
-                            
+                            int ligne2 = ligne + j;
+                            int colonne2 = colonne + i;
+                            while(ligne2 >= 0 && ligne2 < 8 && colonne2 >= 0 && colonne2 < 8 && this.plateau[colonne2][ligne2] == CaseStatut.blanche)
+                            {
+                                ligne2+=j;
+                                colonne2+=i;
+                            }
+                            if(this.plateau[colonne2][ligne2] == CaseStatut.blanche)
+                            {
+                                while(ligne2 != ligne && colonne2 != colonne)
+                                {
+                                    ligne2 -= j;
+                                    colonne2 -=i;
+                                    this.plateau[colonne2][ligne2] = CaseStatut.blanche;
+                                }
+                            }
                         }
-                        else if(a == 2 && this.plateau[colonne + i][ligne + j] == CaseStatut.blanche)
-                        {
-                            dernierJoueur = "Joueur 2";
-                            testDirection(colonne,ligne,i,j,CaseStatut.blanche);
-                        }
-                    }
                 }
-            }
+        
         }
 
-        return isPossible;
+ 
     }
     
     @Override
@@ -164,20 +165,24 @@ public class Jeu implements API {
     
     public boolean checkAvailability(int colonne,int ligne,CaseStatut couleur)
     {
-            boolean isPossible = false;
+        boolean isPossible = false;
+        if(ligne < 1 || ligne >= 8 || colonne < 1 || colonne > 8 || this.plateau[colonne][ligne] != CaseStatut.vide)
+        {
+            return false;
+        }
 
-            for(int i = -1; i < 2; i++)
+        for(int i = -1; i < 2; i++)
         {
             for(int j = -1; j < 2; j++)
             {
                 if(colonne + i >= 0 && colonne + i < 8 && ligne + j >= 0 && ligne + j < 8)
                 {
                     {
-                        if(this.plateau[colonne + i][ligne + j] == couleur)
+                        if(this.plateau[colonne + i][ligne + j] == inverse(couleur))
                         {
                             int ligne2 = ligne + j;
                             int colonne2 = colonne + i;
-                            while(ligne2 >= 0 && ligne2 < 8 && colonne2 >= 0 && colonne2 < 8 && this.plateau[colonne2][ligne2] == couleur)
+                            while(ligne2 >= 0 && ligne2 < 8 && colonne2 >= 0 && colonne2 < 8 && this.plateau[colonne2][ligne2] == inverse(couleur))
                             {
                                 ligne2+=j;
                                 colonne2+=i;
