@@ -73,6 +73,7 @@ public class Jeu implements API{
                                     colonne2 -=i;
                                     this.plateau[colonne2][ligne2] = CaseStatut.blanche;
                                 }
+                                isPossible = true;
                             }
                             
                         }
@@ -94,23 +95,15 @@ public class Jeu implements API{
                                     colonne2 -=i;
                                     this.plateau[colonne2][ligne2] = CaseStatut.noire;
                                 }
+                                isPossible = true;
                             }
                         }
-                        if(this.plateau[colonne + i][ligne + j] != CaseStatut.vide)
                     }
-                    isPossible = true;
-                    break;
-                }
+                    }
             }
         }
-        if(!isPossible)
-        {
-            return false;
-        }
-        
-        
-        
-        return true;
+
+        return isPossible;
     }
     
     @Override
