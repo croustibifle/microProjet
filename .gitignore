@@ -1,6 +1,13 @@
+<<<<<<< Updated upstream
 /nbproject/
 /build.xml
 /web/WEB-INF/
 /src/conf/
 /.idea
 /.gitignore
+=======
+/nbproject/
+/build.xml
+/web/WEB-INF/
+/src/conf/
+>>>>>>> Stashed changes
