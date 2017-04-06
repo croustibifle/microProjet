@@ -3,15 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Jeu;
+package java.Jeu;
 
+import java.Jeu.API;
+import java.Jeu.CaseStatut;
 import java.util.ArrayList;
 
 /**
  *
  * @author theking
  */
-public class Jeu implements API{
+public class Jeu implements API {
     private CaseStatut[][] plateau;
     private String dernierJoueur = null;
     private int derniereAct;
@@ -97,9 +99,10 @@ public class Jeu implements API{
     @Override
     public String statut()
     {
-        if (dernierJoueur == "Joueur 1") return "Joueur 2";
-        else return "Joueur 1";
-        
+        if (dernierJoueur == "Joueur 1")
+            return "Joueur 2";
+        else
+            return "Joueur 1";
     }
     
     @Override

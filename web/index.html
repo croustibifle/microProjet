@@ -6,11 +6,56 @@ and open the template in the editor.
 -->
 <html>
     <head>
-        <title>TODO supply a title</title>
-        <meta charset="UTF-8">
+        <title>Projet Jeux</title>
+        <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="template.css" rel="stylesheet">
     </head>
     <body>
-        <div>TODO write content</div>
+    <div class="carousel fade-carousel slide" data-ride="carousel" data-interval="4000" id="bs-carousel">
+        <!-- Overlay -->
+        <div class="overlay"></div>
+
+        <!-- Indicators -->
+        <ol class="carousel-indicators">
+            <li data-target="#bs-carousel" data-slide-to="0" class="active"></li>
+            <li data-target="#bs-carousel" data-slide-to="1"></li>
+            <li data-target="#bs-carousel" data-slide-to="2"></li>
+        </ol>
+
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner">
+            <div class="item slides active">
+                <div class="slide-1"></div>
+                <div class="hero">
+                    <hgroup>
+                        <h1>We are creative</h1>
+                        <h3>Get start your next awesome project</h3>
+                    </hgroup>
+                    <button class="btn btn-hero btn-lg" role="button">See all features</button>
+                </div>
+            </div>
+            <div class="item slides">
+                <div class="slide-2"></div>
+                <div class="hero">
+                    <hgroup>
+                        <h1>We are smart</h1>
+                        <h3>Get start your next awesome project</h3>
+                    </hgroup>
+                    <button class="btn btn-hero btn-lg" role="button">See all features</button>
+                </div>
+            </div>
+            <div class="item slides">
+                <div class="slide-3"></div>
+                <div class="hero">
+                    <hgroup>
+                        <h1>We are amazing</h1>
+                        <h3>Get start your next awesome project</h3>
+                    </hgroup>
+                    <button class="btn btn-hero btn-lg" role="button">See all features</button>
+                </div>
+            </div>
+        </div>
+    </div>
     </body>
 </html>
