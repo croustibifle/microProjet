@@ -75,7 +75,20 @@ public class Jeu implements API{
     @Override
     public int vainqueur()
     {
-        return 0;
+        int compt1 = 0;
+        int compt2 = 0;
+        for(int i = 0; i < 8; i++)
+        {
+            for(int j = 0; j<8;j++)
+            {
+                if(this.plateau[j][i] == CaseStatut.blanche) compt1++;
+                else if(this.plateau[j][i] == CaseStatut.noire) compt2++;
+            }
+        }
+        
+        if(compt1 > compt2) return 1;
+        else if(compt2 > compt1) return 2;
+        else return 0;     
     }
     
     @Override
@@ -126,14 +139,16 @@ public class Jeu implements API{
         return CaseStatut.vide;
     }
     
-    public boolean plateauPlein(CaseStatut[][] plateau) // return true si plein, false sinon
+    public boolean finDePartie() 
     {
         boolean check = true;
         for(int i = 0; i < 8; i++)
         {
             for(int j = 0; j<8;j++)
             {
-                if(this.plateau[j][i] == CaseStatut.vide) check = false;
+                String indexCase = "" + j + i; 
+                if (action(1,Integer.parseInt(indexCase))) check = true;
+                if (action(2,Integer.parseInt(indexCase))) check = true;
             }
         }
         return check;
