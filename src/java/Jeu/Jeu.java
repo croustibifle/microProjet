@@ -163,6 +163,7 @@ public class Jeu implements API {
                 ligne2 -= j;
                 colonne2 -=i;
                 this.plateau[colonne2][ligne2] = inverse(couleur);
+                derniereAct = Integer.parseInt("" + j + i);
             }
         }
         
@@ -240,7 +241,6 @@ public class Jeu implements API {
         {
             for(int j = 0; j<8;j++)
             {
-                String indexCase = "" + j + i; 
                 if (!checkAvailability(j,i,CaseStatut.blanche)) dernierJoueur = 1;
                 if (!checkAvailability(j,i,CaseStatut.noire)) dernierJoueur = 2;
             }
