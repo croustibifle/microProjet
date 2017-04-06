@@ -9,46 +9,19 @@ package Jeu;
  *
  * @author theking
  */
-public class API {
+public interface API {
+
     
-    public API()
-    {
-        
-    }
+    public void init();
     
-    public void init()
-    {
-        
-    }
+    public boolean action(int a, int b);
     
-    public boolean action(int a, int b)
-    {
-        return true;
-    }
+    public int vainqueur();
     
-    public int vainqueur()
-    {
-        return 0;
-    }
+    public String statut();
     
-    public String statut()
-    {
-        return "Joueur 1";
-    }
+    public int derniereAction();
     
-    public int derniereAction()
-    {
-        return 0;
-    }
-    
-    public String affichage()
-    {
-        return "information";
-    }
-    
-    public static void main(String [ ] args)
-    {
-        
-    }
+    public String affichage();
     
 }
