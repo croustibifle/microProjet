@@ -12,7 +12,7 @@ package Jeu;
  */
 public class Jeu implements API {
     private CaseStatut[][] plateau;
-    private String dernierJoueur = null;
+    private int dernierJoueur = 0;
     private int derniereAct;
  
 //=================== Constructeur ========================
@@ -48,24 +48,29 @@ public class Jeu implements API {
     {
         int ligne = (b % 10) - 1;
         int colonne = (b / 10) - 1;
-            for(int i = -1; i < 2; i++)
+        for(int i = -1; i < 2; i++)
+        {
+            for(int j = -1; j < 2; j++)
             {
-                for(int j = -1; j < 2; j++)
+                if (a == 1 && checkAvailability(colonne,ligne,CaseStatut.noire))
                 {
-                    if (a == 1 && checkAvailability(colonne,ligne,CaseStatut.noire))
+                    if(colonne + i >= 0 && colonne + i < 8 && ligne + j >= 0 && ligne + j < 8 && this.plateau[colonne + i][ligne + j] == CaseStatut.blanche)
                     {
-                        if(colonne + i >= 0 && colonne + i < 8 && ligne + j >= 0 && ligne + j < 8 && this.plateau[colonne + i][ligne + j] == CaseStatut.blanche)
-                        {
-                            testDirection(colonne,ligne,i,j,CaseStatut.blanche);
-                        }
-                    }else if (a == 2 && checkAvailability(colonne,ligne,CaseStatut.blanche))
-                        if(colonne + i >= 0 && colonne + i < 8 && ligne + j >= 0 && ligne + j < 8 && this.plateau[colonne + i][ligne + j] == CaseStatut.noire)
-                        {
-                            testDirection(colonne,ligne,i,j,CaseStatut.noire);
-                        }
+                        testDirection(colonne,ligne,i,j,CaseStatut.blanche);
+                    }
+                    dernierJoueur = 1;
+                }else if (a == 2 && checkAvailability(colonne,ligne,CaseStatut.blanche))
+                {
+                    if(colonne + i >= 0 && colonne + i < 8 && ligne + j >= 0 && ligne + j < 8 && this.plateau[colonne + i][ligne + j] == CaseStatut.noire)
+                    {
+                        testDirection(colonne,ligne,i,j,CaseStatut.noire);
+                    }
+                    dernierJoueur = 2;
                 }
-        
             }
+
+        }
+        joueurCourant();
         return checkAvailability(colonne,ligne,CaseStatut.noire);
         
     }
@@ -96,7 +101,7 @@ public class Jeu implements API {
     @Override
     public String statut()
     {
-        if (dernierJoueur == "Joueur 1")
+        if (dernierJoueur == 1)
             return "Joueur 2";
         else
             return "Joueur 1";
@@ -225,6 +230,21 @@ public class Jeu implements API {
             }
         }
         return check;
+    }
+    
+    // ================= attribue le joueur courant ====================
+    
+    public void joueurCourant()
+    {
+        for(int i = 0; i < 8; i++)
+        {
+            for(int j = 0; j<8;j++)
+            {
+                String indexCase = "" + j + i; 
+                if (!checkAvailability(j,i,CaseStatut.blanche)) dernierJoueur = 1;
+                if (!checkAvailability(j,i,CaseStatut.noire)) dernierJoueur = 2;
+            }
+        }
     }
     
 }
