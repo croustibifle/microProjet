@@ -9,7 +9,7 @@ package Jeu;
  *
  * @author theking
  */
-public class Jeu implement API{
+public class Jeu implements API{
     
     public void init()
     {
